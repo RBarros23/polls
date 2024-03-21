@@ -5,6 +5,7 @@ import { voteOnPoll } from './routes/vote-on-poll';
 import cookie from '@fastify/cookie'
 import websocket from '@fastify/websocket';
 import { pollResults } from './ws/poll-results';
+import fastifyCors from '@fastify/cors';
 
 const app = fastify();
 
@@ -13,6 +14,11 @@ app.register(cookie, {
     hook: 'onRequest',
     parseOptions: {}
 });
+
+app.register(fastifyCors, {
+    origin: "*" 
+  });
+
 
 app.register( websocket );
 
